@@ -47,7 +47,13 @@ The application follows a single-page layout with modular sections:
 - **Responsive Design**: Mobile-first approach with careful attention to logo stretching prevention
 - **SEO Optimization**: Complete metadata, OpenGraph, Twitter cards, and JSON-LD structured data
 - **Interactive Elements**: Smooth scrolling navigation, hover effects, project modals
-- **Contact Form**: Simple form with client-side state management (currently no backend)
+- **Contact Form**: Full backend integration with MailerSend email service and Google Cloud Storage for data persistence
+
+### Backend API
+- **Email Service**: Uses MailerSend API for professional email delivery
+- **Data Storage**: Contact form submissions saved to Google Cloud Storage in `services-contact/` directory
+- **API Route**: `/api/contact` handles form submissions with validation and error handling
+- **Environment Variables**: Requires MAILERSEND_API_TOKEN, MAILERSEND_FROM_EMAIL, CONTACT_EMAIL, and GCS_BUCKET_NAME
 
 ## Important Notes
 

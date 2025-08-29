@@ -1,0 +1,53 @@
+steps:
+  # Install dependencies
+  - name: 'node:18'
+    entrypoint: 'npm'
+    args: ['ci']
+
+  # Build the Next.js website
+  - name: 'node:18'
+    entrypoint: 'npm'
+    args: ['run', 'build']
+
+  # Build Docker image
+  - name: 'gcr.io/cloud-builders/docker'
+    args: ['build', '-f', 'Dockerfile', '-t', 'gcr.io/$PROJECT_ID/seifi-services-website:$SHORT_SHA', '.']
+
+  # Push Docker image to Container Registry
+  - name: 'gcr.io/cloud-builders/docker'
+    args: ['push', 'gcr.io/$PROJECT_ID/seifi-services-website:$SHORT_SHA']
+
+  # Deploy to Cloud Run with secrets
+  - name: 'gcr.io/google.com/cloudsdktool/cloud-sdk:slim'
+    entrypoint: 'gcloud'
+    args:
+    - 'run'
+    - 'deploy'
+    - 'seifi-services-website'
+    - '--image'
+    - 'gcr.io/$PROJECT_ID/seifi-services-website:$SHORT_SHA'
+    - '--region'
+    - 'us-central1'
+    - '--platform'
+    - 'managed'
+    - '--allow-unauthenticated'
+    - '--port'
+    - '3000'
+    - '--min-instances'
+    - '0'
+    - '--max-instances'
+    - '10'
+    - '--memory'
+    - '1Gi'
+    - '--cpu'
+    - '1'
+    - '--service-account'
+    - 'seifi-services-contact-form@$PROJECT_ID.iam.gserviceaccount.com'
+    - '--update-secrets'
+    - 'MAILERSEND_API_TOKEN=mailersend-api-token:latest,MAILERSEND_FROM_EMAIL=mailersend-from-email:latest,CONTACT_EMAIL=contact-email:latest,GCS_BUCKET_NAME=gcs-bucket-name:latest'
+
+images:
+  - 'gcr.io/$PROJECT_ID/seifi-services-website:$SHORT_SHA'
+
+options:
+  logging: CLOUD_LOGGING_ONLY

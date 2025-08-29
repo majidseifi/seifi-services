@@ -19,13 +19,29 @@ const ContactSection = () => {
     e.preventDefault()
     setIsSubmitting(true)
     
-    // Here you would typically send the form data to your backend
-    // For now, we'll just simulate a submission
-    setTimeout(() => {
+    try {
+      const response = await fetch('/api/contact', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData),
+      })
+      
+      const result = await response.json()
+      
+      if (response.ok && result.success) {
+        alert('Thank you for your message! I\'ll get back to you soon.')
+        setFormData({ name: '', email: '', subject: '', message: '' })
+      } else {
+        throw new Error(result.message || 'Failed to send message')
+      }
+    } catch (error: any) {
+      console.error('Contact form error:', error)
+      alert('Sorry, there was an error sending your message. Please try again or contact me directly at majid@seifi.dev')
+    } finally {
       setIsSubmitting(false)
-      alert('Thank you for your message! I\'ll get back to you soon.')
-      setFormData({ name: '', email: '', subject: '', message: '' })
-    }, 1000)
+    }
   }
 
   return (
