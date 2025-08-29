@@ -1,0 +1,140 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --primary-black: #000000;
+  --accent-yellow: #FFB800;
+  --accent-blue: #009DFF;
+  --text-white: #ffffff;
+  --text-gray: #cccccc;
+}
+
+@layer base {
+  * {
+    box-sizing: border-box;
+  }
+
+  body {
+    font-family: 'Inter', sans-serif;
+    background-color: var(--primary-black);
+    color: var(--text-white);
+    line-height: 1.6;
+    scroll-behavior: smooth;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+}
+
+@layer components {
+  .btn-accent {
+    @apply bg-accent-yellow text-primary-black font-semibold py-3 px-8 rounded-full transition-all duration-300 hover:bg-accent-blue hover:text-white hover:-translate-y-0.5 hover:shadow-lg hover:shadow-accent-yellow/30 cursor-pointer;
+  }
+
+  .btn-outline-light {
+    @apply border-2 border-text-white text-text-white bg-transparent font-semibold py-2.5 px-8 rounded-full transition-all duration-300 hover:bg-text-white hover:text-primary-black hover:-translate-y-0.5;
+  }
+
+  .section-title {
+    @apply text-5xl font-bold text-text-white relative inline-block;
+  }
+
+  .section-title::after {
+    content: '';
+    @apply absolute -bottom-3 left-0 w-16 h-1 bg-accent-yellow rounded-sm;
+  }
+
+  .tech-icon-item {
+    @apply flex flex-col items-center justify-center text-center p-4 bg-gradient-to-br from-accent-yellow/10 to-accent-blue/10 rounded-2xl border border-white/10 transition-all duration-300 hover:-translate-y-2 hover:from-accent-yellow/20 hover:to-accent-blue/20 hover:border-accent-yellow hover:shadow-lg hover:shadow-accent-yellow/20;
+    min-height: 100px;
+  }
+
+  .tech-icon-item img {
+    max-width: 48px;
+    max-height: 48px;
+    width: auto;
+    height: auto;
+    object-fit: contain;
+  }
+
+  .skill-item {
+    @apply bg-gradient-to-br from-accent-yellow/10 to-accent-blue/10 p-3 rounded-xl text-center font-semibold text-sm border border-white/10 transition-all duration-300 hover:-translate-y-2 hover:from-accent-yellow/20 hover:to-accent-blue/20 hover:border-accent-yellow;
+  }
+
+  .project-card {
+    @apply bg-gradient-to-br from-primary-gray to-primary-dark rounded-2xl overflow-hidden transition-all duration-300 border border-white/10 h-full hover:-translate-y-3 hover:shadow-xl hover:shadow-accent-yellow/20 hover:border-accent-yellow;
+  }
+
+  .timeline-item {
+    @apply relative mb-12 last:mb-0;
+  }
+
+  .timeline-content {
+    @apply bg-gradient-to-br from-primary-gray to-primary-dark p-8 rounded-2xl border border-white/10 transition-all duration-300 hover:-translate-y-2 hover:shadow-lg hover:shadow-accent-yellow/20 hover:border-accent-yellow;
+  }
+
+  .contact-item {
+    @apply flex items-center mb-5 last:mb-0 text-text-white;
+  }
+
+  .contact-item i {
+    @apply text-accent-yellow w-6 mr-4 text-xl;
+  }
+
+  .contact-item span,
+  .contact-item a {
+    @apply text-text-white no-underline text-lg font-medium transition-colors duration-300 hover:text-accent-yellow;
+  }
+
+  .education-item {
+    @apply flex items-start bg-gradient-to-br from-primary-gray to-primary-dark p-8 rounded-2xl border border-white/10 transition-all duration-300 hover:-translate-y-2 hover:shadow-lg hover:shadow-accent-blue/20 hover:border-accent-blue;
+  }
+
+  .form-control {
+    @apply bg-white/5 border border-white/20 text-text-white p-4 rounded-xl focus:border-accent-yellow focus:shadow-lg focus:shadow-accent-yellow/25 focus:text-text-white placeholder:text-text-gray;
+  }
+
+  .form-control:focus {
+    background-color: rgba(255, 255, 255, 0.08);
+  }
+
+  .social-link {
+    @apply text-text-gray no-underline font-medium transition-all duration-300 inline-flex items-center gap-2 py-2 px-4 rounded-full border border-white/10 hover:text-accent-yellow hover:border-accent-yellow hover:bg-accent-yellow/10 hover:-translate-y-1;
+  }
+}
+
+@layer utilities {
+  .animation-delay-300 {
+    animation-delay: 0.3s;
+  }
+  
+  .animation-delay-600 {
+    animation-delay: 0.6s;
+  }
+  
+  .animation-delay-900 {
+    animation-delay: 0.9s;
+  }
+  
+  .line-clamp-3 {
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+}
+
+/* Mobile hero image positioning - focus on right side where face is */
+@media (max-width: 768px) {
+  #home .absolute.inset-0:first-child {
+    background-position: 70% center !important;
+    filter: brightness(0.7);
+  }
+  
+  #home .absolute.inset-0:nth-child(2) {
+    background: linear-gradient(135deg, rgba(0, 0, 0, 0.3) 0%, rgba(0, 0, 0, 0.5) 50%, rgba(0, 0, 0, 0.7) 100%);
+  }
+}
