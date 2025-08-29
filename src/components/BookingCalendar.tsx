@@ -6,7 +6,7 @@ import { useEffect } from "react";
 const BookingCalendar = () => {
   useEffect(() => {
     (async function () {
-      const cal = await getCalApi({"namespace":"discovery-call","embedLibUrl":"https://calendar.seifi.dev/embed/embed.js"});
+      const cal = await getCalApi({"namespace":"discovery-call","embedJsUrl":"https://calendar.seifi.dev/embed/embed.js"});
       cal("ui", {
         "hideEventTypeDetails":false,
         "layout":"month_view",
@@ -29,7 +29,10 @@ const BookingCalendar = () => {
           namespace="discovery-call"
           calLink="majidseifi/discovery-call"
           style={{width:"100%",height:"100%",overflow:"scroll"}}
-          config={{"layout":"month_view"}}
+          config={{
+            "layout":"month_view",
+            "theme":"dark"
+          }}
           calOrigin="https://calendar.seifi.dev"
           embedJsUrl="https://calendar.seifi.dev/embed/embed.js"
         />
