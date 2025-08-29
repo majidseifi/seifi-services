@@ -1,6 +1,7 @@
 'use client'
 
 import { useState } from 'react'
+import BookingCalendar from './BookingCalendar'
 
 const ContactSection = () => {
   const [formData, setFormData] = useState({
@@ -57,7 +58,13 @@ const ContactSection = () => {
           </p>
         </div>
 
+        {/* Booking Calendar */}
+        <div className="mb-16">
+          <BookingCalendar />
+        </div>
+
         <div className="grid lg:grid-cols-2 gap-16">
+
           {/* Contact Information */}
           <div>
             <h3 className="text-2xl font-bold text-accent-yellow mb-8">Let's Connect</h3>
@@ -102,7 +109,7 @@ const ContactSection = () => {
                   >
                     LinkedIn Profile
                   </a>
-                  <p className="text-sm text-text-gray">Connect professionally</p>
+                  <p className="text-sm text-text-gray">Connect with me</p>
                 </div>
               </div>
             </div>

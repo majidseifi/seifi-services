@@ -26,6 +26,7 @@ The application follows a single-page layout with modular sections:
   - `ProcessSection` - 4-step development process with timeline design
   - `PortfolioSection` - Featured projects with modal details
   - `ContactSection` - Contact form and information
+  - `BookingCalendar` - Zoho Calendar integration for appointment scheduling
   - `Footer` - Social links and additional info
 
 ### Styling System
@@ -48,12 +49,14 @@ The application follows a single-page layout with modular sections:
 - **SEO Optimization**: Complete metadata, OpenGraph, Twitter cards, and JSON-LD structured data
 - **Interactive Elements**: Smooth scrolling navigation, hover effects, project modals
 - **Contact Form**: Full backend integration with MailerSend email service and Google Cloud Storage for data persistence
+- **Appointment Booking**: Zoho Calendar integration for scheduling consultations with automatic date/time selection and external booking flow
 
 ### Backend API
 - **Email Service**: Uses MailerSend API for professional email delivery
 - **Data Storage**: Contact form submissions saved to Google Cloud Storage in `services-contact/` directory
 - **API Route**: `/api/contact` handles form submissions with validation and error handling
 - **Environment Variables**: Requires MAILERSEND_API_TOKEN, MAILERSEND_FROM_EMAIL, CONTACT_EMAIL, and GCS_BUCKET_NAME
+- **Zoho Integration**: BookingCalendar component uses hardcoded Zoho Calendar API URL for appointment scheduling via external redirect
 
 ## Important Notes
 
