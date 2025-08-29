@@ -1,15 +1,5 @@
 steps:
-  # Install dependencies
-  - name: 'node:18'
-    entrypoint: 'npm'
-    args: ['ci']
-
-  # Build the Next.js website
-  - name: 'node:18'
-    entrypoint: 'npm'
-    args: ['run', 'build']
-
-  # Build Docker image
+  # Build Docker image (includes npm install and build inside)
   - name: 'gcr.io/cloud-builders/docker'
     args: ['build', '-f', 'Dockerfile', '-t', 'gcr.io/$PROJECT_ID/seifi-services-website:$SHORT_SHA', '.']
 
@@ -42,7 +32,7 @@ steps:
     - '--cpu'
     - '1'
     - '--service-account'
-    - 'seifi-services-contact-form@$PROJECT_ID.iam.gserviceaccount.com'
+    - 'portfolio-contact-form@$PROJECT_ID.iam.gserviceaccount.com'
     - '--update-secrets'
     - 'MAILERSEND_API_TOKEN=mailersend-api-token:latest,MAILERSEND_FROM_EMAIL=mailersend-from-email:latest,CONTACT_EMAIL=contact-email:latest,GCS_BUCKET_NAME=gcs-bucket-name:latest'
 
